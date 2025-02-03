@@ -1,8 +1,14 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Shield, TrendingUp, Users } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
 
 export default function Home() {
+  const [isInvestorOpen, setIsInvestorOpen] = useState(false)
+  const [isEntrepreneurOpen, setIsEntrepreneurOpen] = useState(false)
+
   return (
     <div className="flex min-h-screen flex-col">
       <header className="border-b">
@@ -13,6 +19,69 @@ export default function Home() {
             </Link>
           </div>
           <div className="flex items-center gap-4">
+            <>
+              <div 
+                className="relative"
+                onMouseEnter={() => setIsInvestorOpen(true)}
+                onMouseLeave={() => setIsInvestorOpen(false)}
+              >
+                <button
+                  className="px-4 py-2 bg-white hover:bg-gray-50 text-xss"
+                >
+                  YATIRIMCI ▼
+                </button>
+
+                {isInvestorOpen && (
+                  <div className="absolute right-0 top-full mt-1 w-56 bg-white border rounded-md shadow-lg z-50">
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      YATIRIM YAP
+                    </Link>
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      YARDIM MERKEZI
+                    </Link>
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      NASIL YATIRIMCI OLUNUR?
+                    </Link>
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      NASIL KAZANC SAGLARIM?
+                    </Link>
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      FUIP - IKINCIL ISLEMLER
+                    </Link>
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      LIC (LEAD INVESTOR CLUB)
+                    </Link>
+                  </div>
+                )}
+              </div>
+
+              <div 
+                className="relative"
+                onMouseEnter={() => setIsEntrepreneurOpen(true)}
+                onMouseLeave={() => setIsEntrepreneurOpen(false)}
+              >
+                <button
+                  className="px-2 py-2 bg-white hover:bg-gray-50"
+                >
+                  GIRISIMCI ▼
+                </button>
+
+                {isEntrepreneurOpen && (
+                  <div className="absolute right-0 top-full mt-1 w-64 bg-white border rounded-md shadow-lg z-50 text-sm">
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      KAMPANYA BASLAT
+                    </Link>
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      YARDIM MERKEZI
+                    </Link>
+                    <Link href="/" className="block px-4 py-2 hover:bg-gray-100 text-sm">
+                      FINANSMANA NASIL ULASIRIM?
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </>
+
             <Link href="/giris">
               <Button variant="ghost">Giriş Yap</Button>
             </Link>
