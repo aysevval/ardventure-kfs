@@ -5,6 +5,17 @@ import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
+// Define an interface for the Campaign type
+interface Campaign {
+  _id: string
+  title: string
+  description: string
+  image?: string
+  status: string
+  sector: string
+  // Add other properties as needed
+}
+
 const fetchCampaigns = async () => {
   const res = await fetch("/api/campaigns")
   if (!res.ok) {
@@ -16,12 +27,13 @@ const fetchCampaigns = async () => {
 export default function Home() {
   const [isInvestorOpen, setIsInvestorOpen] = useState(false)
   const [isEntrepreneurOpen, setIsEntrepreneurOpen] = useState(false)
-  const [campaigns, setCampaigns] = useState([])
-  const [filteredCampaigns, setFilteredCampaigns] = useState([])
+  // Properly type the campaigns state
+  const [campaigns, setCampaigns] = useState<Campaign[]>([])
+  const [filteredCampaigns, setFilteredCampaigns] = useState<Campaign[]>([])
   const [statusFilter, setStatusFilter] = useState("all")
   const [sectorFilter, setSectorFilter] = useState("all")
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     setIsLoading(true)
@@ -114,7 +126,9 @@ export default function Home() {
         <section className="bg-gray-100 py-20">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl font-bold mb-4 text-center">Ardventure KFS</h1>
-            <p className="text-lg text-gray-600 text-center mb-8">Türkiye'nin ilk ve tek Kitle Fonlaması Platformu</p>
+            <p className="text-lg text-gray-600 text-center mb-8">
+              Türkiye&apos;nin en güvenilir ve kullanıcı dostu kitle fonlama platformu
+            </p>
             <Link href="/kampanyalar">
               <Button size="lg" variant="outline" className="bg-primary-foreground/10 mx-auto block">
                 Projeleri Keşfet

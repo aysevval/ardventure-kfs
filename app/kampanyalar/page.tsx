@@ -5,6 +5,17 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
+// Define an interface for the Campaign type
+interface Campaign {
+  _id: string
+  title: string
+  description: string
+  image?: string
+  status: string
+  sector: string
+  // Add other properties as needed
+}
+
 const fetchCampaigns = async () => {
   const res = await fetch("/api/campaigns")
   if (!res.ok) {
@@ -14,12 +25,13 @@ const fetchCampaigns = async () => {
 }
 
 export default function Kampanyalar() {
-  const [campaigns, setCampaigns] = useState([])
-  const [filteredCampaigns, setFilteredCampaigns] = useState([])
+  // Properly type the campaigns state
+  const [campaigns, setCampaigns] = useState<Campaign[]>([])
+  const [filteredCampaigns, setFilteredCampaigns] = useState<Campaign[]>([])
   const [statusFilter, setStatusFilter] = useState("all")
   const [sectorFilter, setSectorFilter] = useState("all")
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     fetchCampaigns()

@@ -4,7 +4,19 @@ import { useState, useEffect } from "react"
 import { useParams, useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 
-const fetchCampaign = async (id) => {
+// Define an interface for the Campaign type
+interface Campaign {
+  title: string
+  description: string
+  image?: string
+  targetFund: number
+  raisedFund: number
+  remainingDays: number
+  investorCount: number
+  // Add other properties as needed
+}
+
+const fetchCampaign = async (id: string) => {
   const res = await fetch(`/api/campaigns/${id}`)
   if (!res.ok) {
     throw new Error("Failed to fetch campaign")
@@ -15,14 +27,15 @@ const fetchCampaign = async (id) => {
 export default function KampanyaDetay() {
   const params = useParams()
   const searchParams = useSearchParams()
-  const [campaign, setCampaign] = useState(null)
+  // Properly type the campaign state
+  const [campaign, setCampaign] = useState<Campaign | null>(null)
   const [activeTab, setActiveTab] = useState("details")
   const [isLoading, setIsLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    if (params.id) {
-      fetchCampaign(params.id)
+    if (params && params.id) {
+      fetchCampaign(params.id as string)
         .then((data) => {
           setCampaign(data)
           setIsLoading(false)
@@ -32,10 +45,10 @@ export default function KampanyaDetay() {
           setIsLoading(false)
         })
     }
-  }, [params.id])
+  }, [params])
 
   useEffect(() => {
-    if (searchParams.get("tab") === "satis") {
+    if (searchParams && searchParams.get("tab") === "satis") {
       setActiveTab("invest")
     }
   }, [searchParams])

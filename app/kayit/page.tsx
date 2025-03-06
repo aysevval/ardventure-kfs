@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -24,6 +26,7 @@ export default function KayitPage() {
         title: "Kayıt başarılı!",
         description: "Hesabınız oluşturuldu. Giriş yapabilirsiniz.",
       })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       toast({
         title: "Hata!",

@@ -1,3 +1,5 @@
+"use client"
+
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -21,6 +23,7 @@ export function MFASetup({ userId, onSetupComplete }: MFASetupProps) {
       })
       const data = await response.json()
       setQrCode(data.qrCode)
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("MFA kurulumu başlatılırken bir hata oluştu.")
     }
@@ -38,6 +41,7 @@ export function MFASetup({ userId, onSetupComplete }: MFASetupProps) {
       } else {
         setError("Geçersiz token. Lütfen tekrar deneyin.")
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (err) {
       setError("Token doğrulanırken bir hata oluştu.")
     }

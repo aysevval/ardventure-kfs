@@ -24,6 +24,7 @@ export async function generateQRCode(secret: string, email: string): Promise<str
 }
 
 // MFA durumunu kontrol et
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export async function checkMFAStatus(userId: string): Promise<boolean> {
   // Bu fonksiyon, veritabanından kullanıcının MFA durumunu kontrol etmelidir
   // Örnek implementasyon:
